@@ -10,5 +10,6 @@
         <appender-ref ref="STDOUT"/>
     </root>
     <logger name="liquibase" level="info"/>
+    <logger name="liquibase.database.core" level="debug"/>
     <logger name="liquibase.servicelocator.CustomResolverServiceLocator" level="off"/>
 </configuration>
