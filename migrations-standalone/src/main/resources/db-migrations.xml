@@ -1,0 +1,38 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="2019.001" author="prem">
+        <createTable tableName="employees">
+            <column name="id" type="varchar(36)">
+                <constraints primaryKey="true" primaryKeyName="employees_pk"/>
+            </column>
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2019.002" author="prem">
+        <insert tableName="employees">
+            <column name="id">abc123</column>
+            <column name="first_name">First1</column>
+            <column name="last_name">Last1</column>
+            <column name="email">f1@l.com</column>
+        </insert>
+        <rollback>
+            <delete tableName="employees">
+                <where>id='abc123'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+    <changeSet id="2019.003" author="prem">
+        <renameColumn tableName="employees" oldColumnName="email" newColumnName="email_address"/>
+    </changeSet>
+</databaseChangeLog>
