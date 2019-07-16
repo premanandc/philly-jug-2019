@@ -14,10 +14,9 @@ import org.testcontainers.containers.MySQLContainer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(properties = "spring.main.banner-mode=off")
-@ContextConfiguration(initializers = DatabaseMigrationTests.Initializer.class)
-public class DatabaseMigrationTests {
+@ContextConfiguration(initializers = MySqlDatabaseMigrationTests.Initializer.class)
+public class MySqlDatabaseMigrationTests extends AbstractDatabaseMigrationTests {
 
     static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         public void initialize(ConfigurableApplicationContext context) {
@@ -32,9 +31,6 @@ public class DatabaseMigrationTests {
     }
 
     @ClassRule
-    public static OutputCapture output = new OutputCapture();
-
-    @ClassRule
     public static MySQLContainer mySqlContainer = new MySQLContainer() {
         @Override
         public String getDriverClassName() {
@@ -42,19 +38,5 @@ public class DatabaseMigrationTests {
         }
     };
 
-    @Test
-    public void shouldNotContainErrors() {
-        assertThat(output.toString()).doesNotContainPattern("(?i)ERROR");
-    }
-
-    @Test
-    public void shouldNotContainExceptions() {
-        assertThat(output.toString()).doesNotContainPattern("(?i)Exception");
-    }
-
-    @Test
-    public void shouldApplyAllMigrations() {
-        assertThat(output.toString()).contains("Successfully released change log lock");
-    }
 
 }
