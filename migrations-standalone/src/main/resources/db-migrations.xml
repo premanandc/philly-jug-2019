@@ -33,6 +33,7 @@
         </rollback>
     </changeSet>
     <changeSet id="2019.003" author="prem">
-        <renameColumn tableName="employees" oldColumnName="email" newColumnName="email_address"/>
+        <renameColumn tableName="employees" oldColumnName="email" newColumnName="email_address"
+                      columnDataType="varchar(255)"/>
     </changeSet>
 </databaseChangeLog>
