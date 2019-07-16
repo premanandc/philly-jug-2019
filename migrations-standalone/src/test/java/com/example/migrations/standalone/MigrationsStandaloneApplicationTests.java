@@ -1,4 +1,4 @@
-package com.example.migrations.demo;
+package com.example.migrations.standalone;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MigrationsDemoApplicationTests {
+public class MigrationsStandaloneApplicationTests {
 
 	@Test
 	public void contextLoads() {
